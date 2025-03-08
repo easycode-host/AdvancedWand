@@ -1,0 +1,6 @@
+name: Construction Wand
+version: '1.0-SNAPSHOT'
+main: me.easycode.constructionWand.ConstructionWand
+api-version: '1.20'
+load: STARTUP
+authors: [ easycode ]
