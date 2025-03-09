@@ -1,6 +1,36 @@
-name: Construction Wand
+name: AdvancedWand
 version: '1.0-SNAPSHOT'
-main: me.easycode.constructionWand.ConstructionWand
+main: me.easycode.advancedWand.AdvancedWand
 api-version: '1.20'
 load: STARTUP
 authors: [ easycode ]
+commands:
+  awand:
+    description: 主命令
+    usage: |
+      /awand give - 获取法杖
+      /awand build <材料> [半径] - 执行建造
+      /awand undo [次数] - 撤销操作
+      /awand save <名称> - 保存蓝图
+      /awand load <名称> - 加载蓝图
+    aliases: [aw]
+
+permissions:
+  advancedwand.use:
+    description: 使用法杖的基础权限
+    default: true
+  advancedwand.build:
+    description: 执行建造操作的权限
+    default: op
+  advancedwand.blueprint:
+    description: 使用蓝图功能的权限
+    default: op
+  advancedwand.admin:
+    description: 管理权限
+    default: op
+  advancedwand.bypass:
+    description: 绕过所有限制
+    default: false
+  advancedwand.unlimited:
+    description: 无限材料模式
+    default: op

@@ -1,4 +1,4 @@
-package me.easycode.constructionWand;
+package me.easycode.advancedWand;
 
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -18,6 +18,7 @@ import org.bukkit.util.Vector;
 
 import java.util.*;
 
+import me.easycode.advancedWand.SelectionParticle;
 
 public class AdvancedWand extends JavaPlugin implements Listener {
 
@@ -26,7 +27,6 @@ public class AdvancedWand extends JavaPlugin implements Listener {
     private final Map<UUID, BuildMode> playerModes = new HashMap<>();
     private final Map<String, List<BlockVector>> blueprints = new HashMap<>();
 
-    private ItemStack wandItem;
     private final int MAX_HISTORY = 5;
     private final int MAX_BLUEPRINT_SIZE = 1000;
 
@@ -200,7 +200,7 @@ public class AdvancedWand extends JavaPlugin implements Listener {
         return blocks;
     }
     private void createWandItem() {
-        wandItem = new ItemStack(Material.BLAZE_ROD);
+        ItemStack wandItem = new ItemStack(Material.BLAZE_ROD);
         ItemMeta meta = wandItem.getItemMeta();
         meta.setDisplayName(ChatColor.GOLD + "高级建筑法杖");
         meta.setLore(Arrays.asList(
@@ -242,6 +242,14 @@ public class AdvancedWand extends JavaPlugin implements Listener {
         String message = ChatColor.GREEN + (isPrimary ? "主" : "副") + "选择点已设置 "
                 + loc.getBlockX() + ", " + loc.getBlockY() + ", " + loc.getBlockZ();
         player.sendMessage(message);
+
+        // 当两个点都设置时显示粒子
+        if (points[0] != null && points[1] != null) {
+            SelectionParticle.showSelection(player, points[0], points[1]);
+        } else {
+            SelectionParticle.stopDisplay(player);
+        }
+
         playEffect(loc, Color.LIME);
     }
 
